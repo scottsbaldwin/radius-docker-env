@@ -2,11 +2,10 @@ rest {
   tls {
   }
 
-  connect_uri = "https://INSERT_API_HOST/api/v1/radius"
   connect_timeout = 90.0
 
   authenticate {
-    uri = "${..connect_uri}/authenticate"
+    uri = "https://INSERT_API_HOST/api/v1/radius/authenticate"
     method = 'post'
     body = 'json'
     data = '{ "user": "%{User-Name}", "password": "%{User-Password}", "environment_url": "INSERT_ENVIRONMENT_URL", "domain": "INSERT_DIRECTORY_NAME", "ip_address": "%{Packet-Src-IP-Address}" }'
