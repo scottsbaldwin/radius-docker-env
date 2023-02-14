@@ -1,0 +1,27 @@
+rest {
+  tls {
+  }
+
+  connect_uri = "https://INSERT_API_HOST/api/v1/radius"
+  connect_timeout = 90.0
+
+  authenticate {
+    uri = "${..connect_uri}/authenticate"
+    method = 'post'
+    body = 'json'
+    data = '{ "user": "%{User-Name}", "password": "%{User-Password}", "environment_url": "INSERT_ENVIRONMENT_URL", "domain": "INSERT_DIRECTORY_NAME", "ip_address": "%{Packet-Src-IP-Address}" }'
+    tls = ${..tls}
+    timeout = 90
+  }
+
+  pool {
+    start = ${thread[pool].start_servers}
+    min = ${thread[pool].min_spare_servers}
+    max = ${thread[pool].max_servers}
+    spare = ${thread[pool].max_spare_servers}
+    uses = 0
+    retry_delay = 30
+    lifetime = 0
+    idle_timeout = 60
+  }
+}
