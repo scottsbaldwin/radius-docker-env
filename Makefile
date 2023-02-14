@@ -16,4 +16,4 @@ radtest_evo:
 	docker run --rm --platform linux/amd64 --name radtest -it freeradius/freeradius-server radtest 'myuser@example.com' 'Password1!' host.docker.internal 0 mysecret
 
 stop:
-	docker stop freeradius/freeradius-server
+	docker stop my-radius
