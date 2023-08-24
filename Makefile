@@ -7,7 +7,7 @@ radius:
 		-t -p 1812-1813:1812-1813/udp freeradius/freeradius-server -X
 
 radtest_shell:
-	docker run --rm --platform linux/amd64 --name radtest -it freeradius/freeradius-server /bin/bash
+	docker run --rm --platform linux/amd64 --name radtest -v $(PWD)/scripts:/tmp/scripts -it freeradius/freeradius-server /bin/bash
 
 radtest:
 	docker run --rm --platform linux/amd64 --name radtest -it freeradius/freeradius-server radtest bob test host.docker.internal 0 mysecret
