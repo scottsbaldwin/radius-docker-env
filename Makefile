@@ -6,7 +6,7 @@ radius:
 		-v $(PWD)/raddb/sites-available/default:/etc/raddb/sites-available/default \
 		-t -p 1812-1813:1812-1813/udp freeradius/freeradius-server -X
 
-radtest_shell:
+client_shell:
 	docker run --rm --platform linux/amd64 --name radtest -v $(PWD)/scripts:/tmp/scripts -it freeradius/freeradius-server /bin/bash
 
 radtest:

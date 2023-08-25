@@ -27,14 +27,36 @@ make radius
 In another terminal, launch a container to issue tests from:
 
 ```
-make radtest_shell
+make client_shell
 ```
 
-Inside the testing shell, run this command.
+Create a `.env` file in the `scripts` directory that has variables for
 
 ```
-# radtest 'INSERT_EMAIL' 'INSERT_PASSWORD' host.docker.internal 0 mysecret
-radtest 'myuser@example.com' 'Password1!' host.docker.internal 0 mysecret
+# The host of the RADIUS server running in Docker
+RADIUS_HOST=host.docker.internal
+
+# The secret defined in clients.conf
+RADIUS_SECRET=mysecret
+
+# The username (or alias) to login as with the RADIUS server
+RADIUS_USER=
+
+# The password for the username above
+RADIUS_PASS=
+```
+
+Inside the testing shell, run one of the following scripts from the `scripts` directory:
+
+- `simple-auth-push-notification.sh` - issues an authentication request with the assumption that the API will do a push notification
+- `simple-auth-otp.sh` - issues an authentication request with the assumption that the API will accept the provided OTP
+
+```
+/tmp/scripts/simple-auth-push-notification.sh
+
+# or
+
+/tmp/scripts/simple-auth-otp.sh
 ```
 
 ## Testing a Remote RADIUS Server
@@ -58,7 +80,7 @@ RADIUS_PASS=
 Launch a container to issue and attach to a shell:
 
 ```
-make radtest_shell
+make client_shell
 ```
 
 Change into the scripts directory, and use one of the scripts to interact with the remote RADIUS server.
